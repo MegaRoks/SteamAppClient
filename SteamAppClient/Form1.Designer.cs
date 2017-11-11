@@ -52,10 +52,25 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.button2 = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
+            this.label20 = new System.Windows.Forms.Label();
+            this.label21 = new System.Windows.Forms.Label();
+            this.label22 = new System.Windows.Forms.Label();
+            this.label23 = new System.Windows.Forms.Label();
+            this.label24 = new System.Windows.Forms.Label();
+            this.label25 = new System.Windows.Forms.Label();
+            this.label26 = new System.Windows.Forms.Label();
+            this.label27 = new System.Windows.Forms.Label();
+            this.label28 = new System.Windows.Forms.Label();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.listView1 = new System.Windows.Forms.ListView();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox3.SuspendLayout();
+            this.groupBox4.SuspendLayout();
             this.SuspendLayout();
             // 
             // button1
@@ -84,13 +99,14 @@
             this.listBox1.Name = "listBox1";
             this.listBox1.Size = new System.Drawing.Size(120, 134);
             this.listBox1.TabIndex = 2;
+            this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged_1);
             this.listBox1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listBox1_MouseDoubleClick);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(109, 16);
+            this.label1.Location = new System.Drawing.Point(121, 16);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(0, 13);
             this.label1.TabIndex = 3;
@@ -101,7 +117,7 @@
             this.groupBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(40)))), ((int)(((byte)(56)))));
             this.groupBox1.Controls.Add(this.textBox1);
             this.groupBox1.Controls.Add(this.button1);
-            this.groupBox1.ForeColor = System.Drawing.Color.White;
+            this.groupBox1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(143)))), ((int)(((byte)(152)))), ((int)(((byte)(160)))));
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(301, 53);
@@ -113,6 +129,18 @@
             // groupBox2
             // 
             this.groupBox2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(40)))), ((int)(((byte)(56)))));
+            this.groupBox2.Controls.Add(this.label2);
+            this.groupBox2.Controls.Add(this.label16);
+            this.groupBox2.Controls.Add(this.label17);
+            this.groupBox2.Controls.Add(this.label20);
+            this.groupBox2.Controls.Add(this.label21);
+            this.groupBox2.Controls.Add(this.label22);
+            this.groupBox2.Controls.Add(this.label23);
+            this.groupBox2.Controls.Add(this.label24);
+            this.groupBox2.Controls.Add(this.label25);
+            this.groupBox2.Controls.Add(this.label26);
+            this.groupBox2.Controls.Add(this.label27);
+            this.groupBox2.Controls.Add(this.label28);
             this.groupBox2.Controls.Add(this.label15);
             this.groupBox2.Controls.Add(this.label8);
             this.groupBox2.Controls.Add(this.label19);
@@ -130,7 +158,7 @@
             this.groupBox2.Controls.Add(this.label3);
             this.groupBox2.Controls.Add(this.pictureBox1);
             this.groupBox2.Controls.Add(this.label1);
-            this.groupBox2.ForeColor = System.Drawing.Color.White;
+            this.groupBox2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(143)))), ((int)(((byte)(152)))), ((int)(((byte)(160)))));
             this.groupBox2.Location = new System.Drawing.Point(12, 71);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(428, 261);
@@ -146,15 +174,16 @@
             this.label15.ForeColor = System.Drawing.Color.White;
             this.label15.Location = new System.Drawing.Point(6, 107);
             this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(90, 13);
+            this.label15.Size = new System.Drawing.Size(63, 13);
             this.label15.TabIndex = 26;
-            this.label15.Text = "personastateflags";
+            this.label15.Text = "Был в сети";
+            this.label15.Click += new System.EventHandler(this.label15_Click);
             // 
             // label8
             // 
             this.label8.AutoSize = true;
             this.label8.ForeColor = System.Drawing.Color.White;
-            this.label8.Location = new System.Drawing.Point(109, 107);
+            this.label8.Location = new System.Drawing.Point(121, 107);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(0, 13);
             this.label8.TabIndex = 25;
@@ -169,33 +198,37 @@
             this.label19.Size = new System.Drawing.Size(41, 13);
             this.label19.TabIndex = 24;
             this.label19.Text = "Статус";
+            this.label19.Click += new System.EventHandler(this.label19_Click);
             // 
             // label18
             // 
             this.label18.AutoSize = true;
             this.label18.ForeColor = System.Drawing.Color.White;
-            this.label18.Location = new System.Drawing.Point(109, 81);
+            this.label18.Location = new System.Drawing.Point(121, 81);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(0, 13);
             this.label18.TabIndex = 23;
+            this.label18.Click += new System.EventHandler(this.label18_Click);
             // 
             // label14
             // 
             this.label14.AutoSize = true;
             this.label14.ForeColor = System.Drawing.Color.White;
-            this.label14.Location = new System.Drawing.Point(109, 94);
+            this.label14.Location = new System.Drawing.Point(121, 94);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(0, 13);
             this.label14.TabIndex = 19;
+            this.label14.Click += new System.EventHandler(this.label14_Click);
             // 
             // label13
             // 
             this.label13.AutoSize = true;
             this.label13.ForeColor = System.Drawing.Color.White;
-            this.label13.Location = new System.Drawing.Point(109, 55);
+            this.label13.Location = new System.Drawing.Point(121, 55);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(0, 13);
             this.label13.TabIndex = 18;
+            this.label13.Click += new System.EventHandler(this.label13_Click);
             // 
             // label12
             // 
@@ -206,6 +239,7 @@
             this.label12.Size = new System.Drawing.Size(29, 13);
             this.label12.TabIndex = 17;
             this.label12.Text = "Имя";
+            this.label12.Click += new System.EventHandler(this.label12_Click);
             // 
             // label11
             // 
@@ -213,9 +247,10 @@
             this.label11.ForeColor = System.Drawing.Color.White;
             this.label11.Location = new System.Drawing.Point(6, 81);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(94, 13);
+            this.label11.Size = new System.Drawing.Size(80, 13);
             this.label11.TabIndex = 16;
-            this.label11.Text = "Основная группа";
+            this.label11.Text = "Сейчас играет";
+            this.label11.Click += new System.EventHandler(this.label11_Click);
             // 
             // label10
             // 
@@ -226,33 +261,37 @@
             this.label10.Size = new System.Drawing.Size(100, 13);
             this.label10.TabIndex = 15;
             this.label10.Text = "Дата регистрации";
+            this.label10.Click += new System.EventHandler(this.label10_Click);
             // 
             // label9
             // 
             this.label9.AutoSize = true;
             this.label9.ForeColor = System.Drawing.Color.White;
-            this.label9.Location = new System.Drawing.Point(109, 68);
+            this.label9.Location = new System.Drawing.Point(121, 68);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(0, 13);
             this.label9.TabIndex = 14;
+            this.label9.Click += new System.EventHandler(this.label9_Click);
             // 
             // label7
             // 
             this.label7.AutoSize = true;
             this.label7.ForeColor = System.Drawing.Color.White;
-            this.label7.Location = new System.Drawing.Point(109, 42);
+            this.label7.Location = new System.Drawing.Point(121, 42);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(0, 13);
             this.label7.TabIndex = 12;
+            this.label7.Click += new System.EventHandler(this.label7_Click);
             // 
             // label6
             // 
             this.label6.AutoSize = true;
             this.label6.ForeColor = System.Drawing.Color.White;
-            this.label6.Location = new System.Drawing.Point(109, 29);
+            this.label6.Location = new System.Drawing.Point(121, 29);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(0, 13);
             this.label6.TabIndex = 11;
+            this.label6.Click += new System.EventHandler(this.label6_Click);
             // 
             // label5
             // 
@@ -263,6 +302,7 @@
             this.label5.Size = new System.Drawing.Size(29, 13);
             this.label5.TabIndex = 10;
             this.label5.Text = "Nike";
+            this.label5.Click += new System.EventHandler(this.label5_Click);
             // 
             // label4
             // 
@@ -273,6 +313,7 @@
             this.label4.Size = new System.Drawing.Size(79, 13);
             this.label4.TabIndex = 9;
             this.label4.Text = "Приветаность";
+            this.label4.Click += new System.EventHandler(this.label4_Click);
             // 
             // label3
             // 
@@ -301,8 +342,8 @@
             this.groupBox3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.groupBox3.Controls.Add(this.button2);
             this.groupBox3.Controls.Add(this.listBox1);
-            this.groupBox3.ForeColor = System.Drawing.Color.White;
-            this.groupBox3.Location = new System.Drawing.Point(680, 12);
+            this.groupBox3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(143)))), ((int)(((byte)(152)))), ((int)(((byte)(160)))));
+            this.groupBox3.Location = new System.Drawing.Point(892, 12);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.groupBox3.Size = new System.Drawing.Size(134, 194);
@@ -322,12 +363,149 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.ForeColor = System.Drawing.Color.White;
+            this.label2.Location = new System.Drawing.Point(6, 145);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(57, 13);
+            this.label2.TabIndex = 38;
+            this.label2.Text = "Trade Ban";
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.ForeColor = System.Drawing.Color.White;
+            this.label16.Location = new System.Drawing.Point(121, 145);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(0, 13);
+            this.label16.TabIndex = 37;
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.ForeColor = System.Drawing.Color.White;
+            this.label17.Location = new System.Drawing.Point(6, 158);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(96, 13);
+            this.label17.TabIndex = 36;
+            this.label17.Text = "Число VAC банов";
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.ForeColor = System.Drawing.Color.White;
+            this.label20.Location = new System.Drawing.Point(121, 171);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(0, 13);
+            this.label20.TabIndex = 35;
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.ForeColor = System.Drawing.Color.White;
+            this.label21.Location = new System.Drawing.Point(121, 184);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(0, 13);
+            this.label21.TabIndex = 34;
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.ForeColor = System.Drawing.Color.White;
+            this.label22.Location = new System.Drawing.Point(121, 132);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(0, 13);
+            this.label22.TabIndex = 33;
+            this.label22.Click += new System.EventHandler(this.label22_Click);
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.ForeColor = System.Drawing.Color.White;
+            this.label23.Location = new System.Drawing.Point(6, 132);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(49, 13);
+            this.label23.TabIndex = 32;
+            this.label23.Text = "VAC бан";
+            // 
+            // label24
+            // 
+            this.label24.AutoSize = true;
+            this.label24.ForeColor = System.Drawing.Color.White;
+            this.label24.Location = new System.Drawing.Point(6, 171);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(110, 13);
+            this.label24.TabIndex = 31;
+            this.label24.Text = "Число дней запрета";
+            // 
+            // label25
+            // 
+            this.label25.AutoSize = true;
+            this.label25.ForeColor = System.Drawing.Color.White;
+            this.label25.Location = new System.Drawing.Point(6, 184);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(83, 13);
+            this.label25.TabIndex = 30;
+            this.label25.Text = "Запрет в играх";
+            // 
+            // label26
+            // 
+            this.label26.AutoSize = true;
+            this.label26.ForeColor = System.Drawing.Color.White;
+            this.label26.Location = new System.Drawing.Point(121, 158);
+            this.label26.Name = "label26";
+            this.label26.Size = new System.Drawing.Size(0, 13);
+            this.label26.TabIndex = 29;
+            // 
+            // label27
+            // 
+            this.label27.AutoSize = true;
+            this.label27.ForeColor = System.Drawing.Color.White;
+            this.label27.Location = new System.Drawing.Point(121, 119);
+            this.label27.Name = "label27";
+            this.label27.Size = new System.Drawing.Size(0, 13);
+            this.label27.TabIndex = 28;
+            // 
+            // label28
+            // 
+            this.label28.AutoSize = true;
+            this.label28.ForeColor = System.Drawing.Color.White;
+            this.label28.Location = new System.Drawing.Point(6, 119);
+            this.label28.Name = "label28";
+            this.label28.Size = new System.Drawing.Size(80, 13);
+            this.label28.TabIndex = 27;
+            this.label28.Text = "Community Ban";
+            // 
+            // groupBox4
+            // 
+            this.groupBox4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(40)))), ((int)(((byte)(56)))));
+            this.groupBox4.Controls.Add(this.listView1);
+            this.groupBox4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(143)))), ((int)(((byte)(152)))), ((int)(((byte)(160)))));
+            this.groupBox4.Location = new System.Drawing.Point(446, 12);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(326, 320);
+            this.groupBox4.TabIndex = 7;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Недавняя активность";
+            // 
+            // listView1
+            // 
+            this.listView1.Location = new System.Drawing.Point(6, 19);
+            this.listView1.Name = "listView1";
+            this.listView1.Size = new System.Drawing.Size(314, 295);
+            this.listView1.TabIndex = 8;
+            this.listView1.UseCompatibleStateImageBehavior = false;
+            this.listView1.View = System.Windows.Forms.View.List;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(26)))), ((int)(((byte)(33)))));
-            this.ClientSize = new System.Drawing.Size(820, 344);
+            this.ClientSize = new System.Drawing.Size(1038, 344);
+            this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
@@ -340,6 +518,7 @@
             this.groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.groupBox3.ResumeLayout(false);
+            this.groupBox4.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -370,6 +549,20 @@
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.Label label24;
+        private System.Windows.Forms.Label label25;
+        private System.Windows.Forms.Label label26;
+        private System.Windows.Forms.Label label27;
+        private System.Windows.Forms.Label label28;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.ListView listView1;
     }
 }
 
