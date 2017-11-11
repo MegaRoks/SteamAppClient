@@ -139,7 +139,8 @@ namespace SteamAppClient
         private void listBox1_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             string Url = "http://project-megaroks931128.codeanyapp.com";
-            string His = textBox1.Text;
+            string His = listBox1.SelectedItem.ToString();
+            textBox1.Text = listBox1.SelectedItem.ToString();
 
             if (listBox1.Items.Count < 10)
             {
