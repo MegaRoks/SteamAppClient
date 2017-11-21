@@ -6,7 +6,6 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Net;
-using System.Threading;
 using System.Windows.Forms;
 
 namespace SteamAppClient
@@ -30,23 +29,23 @@ namespace SteamAppClient
 
         public class Friend
         {
-            public string steamid { get; set; }
-            public string relationship { get; set; }
-            public int friend_since { get; set; }
+            public string Steamid { get; set; }
+            public string Relationship { get; set; }
+            public int Friend_since { get; set; }
         }
 
-        public class Friends
+        public class FriendsList
         {
-            public List<Friend> friends { get; set; }
-            public int friendslist { get; set; }
+            public List<Friend> Friends { get; set; }
+            public int Friendslist { get; set; }
         }
 
-        public class Games
+        public class GamesList
         {
-            public List<Game> games { get; set; }
+            public List<Game> Games { get; set; }
         }
 
-        public string RequestJson(string Url)
+        public static string RequestJson(string Url)
         {
             WebRequest myRequest = WebRequest.Create(Url);
             WebResponse myResponse = myRequest.GetResponse();
@@ -57,7 +56,7 @@ namespace SteamAppClient
             return json;
         }
 
-        public Bitmap RequestJsonImage(string Url)
+        public static Bitmap RequestJsonImage(string Url)
         {
             HttpWebRequest myRequest = (HttpWebRequest)WebRequest.Create(Url.ToString());
             myRequest.Method = "GET";
@@ -114,34 +113,27 @@ namespace SteamAppClient
 
             pictureBox1.ImageLocation = Convert.ToString(Avatar);
             pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
-            Games game = JsonConvert.DeserializeObject<Games>(json);
+            GamesList game = JsonConvert.DeserializeObject<GamesList>(json);
             DataGridView2(game);
 
-            Friends friends = JsonConvert.DeserializeObject<Friends>(json);
+            FriendsList friends = JsonConvert.DeserializeObject<FriendsList>(json);
             DataGridView(friends);
 
-            string His = textBox1.Text;
-            listView1.View = View.Details;
-            listView1.Columns.Add("ID", 115);
-            listView1.Columns.Add("ID в бд", 0);
-
-            ListViewItem newitem = new ListViewItem(His);
-            newitem.SubItems.Add(Id);
-            listView1.Items.Add(newitem);
         }
-
-        private void удалитьToolStripMenuItem_Click(object sender, EventArgs e)
+        public void His(string Data, string json)
         {
-            ListView.SelectedIndexCollection collection = listView1.SelectedIndices;
-            if (collection.Count != 0)
-            {
-                string Url = "http://project-megaroks931128.codeanyapp.com/news/del/?id=" + listView1.SelectedItems[0].SubItems[1].Text;
-                listView1.Items.RemoveAt(collection[0]);
-                RequestJson(Url);
-            }
+            var obj = JObject.Parse(json);
+            var Id = Convert.ToString(obj["id"]);
+                listView1.View = View.Details;
+                listView1.Columns.Add("ID", 115);
+                listView1.Columns.Add("ID в бд", 0);
+
+                ListViewItem newitem = new ListViewItem(Data);
+                newitem.SubItems.Add(Id);
+                listView1.Items.Add(newitem);         
         }
 
-        private void DataGridView2(Games game)
+        private void DataGridView2(GamesList games)
         {
             DataTable t = new DataTable();
             t.Columns.Add(new DataColumn("Logo", typeof(Bitmap)));
@@ -158,11 +150,14 @@ namespace SteamAppClient
 
             try
             {
-                for (int i = 0; game.games.Count > i; i++)
+                for (int i = 0; games.Games.Count > i; i++)
                 {
-                    string Url = "http://media.steampowered.com/steamcommunity/public/images/apps/" + game.games[i].Appid + "/" + game.games[i].Img_logo_url + ".jpg".ToString();
+                    string Url = "http://media.steampowered.com/steamcommunity/public/images/apps/" + games.Games[i].Appid + "/" + games.Games[i].Img_logo_url + ".jpg".ToString();
                     Bitmap bmp = RequestJsonImage(Url);
-                    t.Rows.Add(new object[] { bmp, game.games[i].Name, game.games[i].Playtime_2weeks, game.games[i].Playtime_forever });
+                    int Playtime_2weeks = Convert.ToInt16(Math.Ceiling(TimeSpan.FromSeconds(games.Games[i].Playtime_2weeks).TotalMinutes));
+                    int Playtime_forever = Convert.ToInt16(Math.Ceiling(TimeSpan.FromSeconds(games.Games[i].Playtime_forever).TotalMinutes));
+
+                    t.Rows.Add(new object[] { bmp, games.Games[i].Name, Playtime_2weeks, Playtime_forever });
                     dataGridView1.DataSource = t;
                 }
             }
@@ -174,7 +169,7 @@ namespace SteamAppClient
             }
         }
 
-        private void DataGridView(Friends friends)
+        private void DataGridView(FriendsList friends)
         {
             DataTable t = new DataTable();
             t.Columns.Add(new DataColumn("Аватар", typeof(Bitmap)));
@@ -191,11 +186,11 @@ namespace SteamAppClient
 
             try
             {
-                if (friends.friends.Count != 0)
+                if (friends.Friends.Count != 0)
                 {
-                    for (int i = 0; friends.friends.Count > i; i++)
+                    for (int i = 0; friends.Friends.Count > i; i++)
                     {
-                        string Url = "http://project-megaroks931128.codeanyapp.com/news/add/?usersid=" + friends.friends[i].steamid;
+                        string Url = "http://project-megaroks931128.codeanyapp.com/news/add/?usersid=" + friends.Friends[i].Steamid;
                         string json = RequestJson(Url);
                         var obj1 = JObject.Parse(json);
                         var avatar = Convert.ToString(obj1["avatar"]);
@@ -203,7 +198,8 @@ namespace SteamAppClient
                         var steamid = Convert.ToString(obj1["steamid"]);
                         var id = Convert.ToString(obj1["id"]);
                         Bitmap bmp = RequestJsonImage(avatar);
-                        t.Rows.Add(new object[] { bmp, personaname, steamid, friends.friends[i].friend_since, friends.friends[i].relationship });
+                        DateTime Friend_since = (new DateTime(1970, 1, 1)).AddSeconds(Convert.ToDouble(friends.Friends[i].Friend_since));
+                        t.Rows.Add(new object[] { bmp, personaname, steamid, Friend_since, friends.Friends[i].Relationship });
                         dataGridView2.DataSource = t;
                         Url = "http://project-megaroks931128.codeanyapp.com/news/del/?id=" + id;
                         json = RequestJson(Url);
@@ -227,28 +223,51 @@ namespace SteamAppClient
 
         private void Button1_Click(object sender, EventArgs e)
         {
-            string Url = "http://project-megaroks931128.codeanyapp.com/news/add/?usersid=" + Convert.ToString(textBox1.Text);
-            string json = RequestJson(Url);
-            ResponseJson(json);       
+            try
+            {
+                string Data = Convert.ToString(textBox1.Text);
+                long s = Convert.ToInt64(textBox1.Text); 
+                string Url = "http://project-megaroks931128.codeanyapp.com/news/add/?usersid=" + Data;
+                string json = RequestJson(Url);
+                ResponseJson(json);
+                His(Data, json);
+                textBox1.Clear();
+            }
+            catch (System.FormatException)
+            {
+                MessageBox.Show("Вы ввели символ! Пожалуйста,введите цифрy");
+                textBox1.Clear();
+            }           
         }
 
-        private void listView1_MouseDoubleClick(object sender, MouseEventArgs e)
+        private void ListView1_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            textBox1.Text = listView1.SelectedItems[0].Text;
             string Url = "http://project-megaroks931128.codeanyapp.com/news/add/?usersid=" + listView1.SelectedItems[0].Text;
             string json = RequestJson(Url);
             ResponseJson(json);
         }
 
-        private void dataGridView2_MouseDoubleClick(object sender, MouseEventArgs e)
+        private void DataGridView2_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            textBox1.Text = listView1.SelectedItems[0].Text;
-            string Url = "http://project-megaroks931128.codeanyapp.com/news/add/?usersid=" + listView1.SelectedItems[0].Text;
+            string Data = Convert.ToString(dataGridView2.CurrentRow.Cells[2].Value);
+            string Url = "http://project-megaroks931128.codeanyapp.com/news/add/?usersid=" + Data;
             string json = RequestJson(Url);
             ResponseJson(json);
+            His(Data, json);
         }
 
-        private void очиститьToolStripMenuItem_Click(object sender, EventArgs e)
+        private void УдалитьToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ListView.SelectedIndexCollection collection = listView1.SelectedIndices;
+            if (collection.Count != 0)
+            {
+                string Url = "http://project-megaroks931128.codeanyapp.com/news/del/?id=" + listView1.SelectedItems[0].SubItems[1].Text;
+                listView1.Items.RemoveAt(collection[0]);
+                RequestJson(Url);
+            }
+        }
+
+        private void ОчиститьToolStripMenuItem_Click(object sender, EventArgs e)
         {
             listView1.Items.Clear();
         }
