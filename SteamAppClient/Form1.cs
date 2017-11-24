@@ -91,6 +91,7 @@ namespace SteamAppClient
             var friendslist = Convert.ToInt32(obj["friendslist"]);
 
             DateTime last_log_off = (new DateTime(1970, 1, 1)).AddSeconds(Convert.ToDouble(Lastlogoff));
+
             if (Timecreated != "")
             {
                 DateTime time_created = (new DateTime(1970, 1, 1)).AddSeconds(Convert.ToDouble(Timecreated));
@@ -122,15 +123,16 @@ namespace SteamAppClient
         }
         public void His(string Data, string json)
         {
+            listView1.View = View.Details;
+            listView1.Columns.Add("ID", 115);
+            listView1.Columns.Add("ID в бд", 0);
+
             var obj = JObject.Parse(json);
             var Id = Convert.ToString(obj["id"]);
-                listView1.View = View.Details;
-                listView1.Columns.Add("ID", 115);
-                listView1.Columns.Add("ID в бд", 0);
 
-                ListViewItem newitem = new ListViewItem(Data);
-                newitem.SubItems.Add(Id);
-                listView1.Items.Add(newitem);         
+            ListViewItem newitem = new ListViewItem(Data);
+            newitem.SubItems.Add(Id);
+            listView1.Items.Add(newitem);         
         }
 
         private void DataGridView2(GamesList games)
@@ -140,7 +142,6 @@ namespace SteamAppClient
             t.Columns.Add("Название");
             t.Columns.Add("За неделю");
             t.Columns.Add("Всего");
-
 
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
             dataGridView1.AutoResizeColumns();
@@ -156,7 +157,6 @@ namespace SteamAppClient
                     Bitmap bmp = RequestJsonImage(Url);
                     int Playtime_2weeks = Convert.ToInt16(Math.Ceiling(TimeSpan.FromSeconds(games.Games[i].Playtime_2weeks).TotalMinutes));
                     int Playtime_forever = Convert.ToInt16(Math.Ceiling(TimeSpan.FromSeconds(games.Games[i].Playtime_forever).TotalMinutes));
-
                     t.Rows.Add(new object[] { bmp, games.Games[i].Name, Playtime_2weeks, Playtime_forever });
                     dataGridView1.DataSource = t;
                 }
@@ -190,7 +190,7 @@ namespace SteamAppClient
                 {
                     for (int i = 0; friends.Friends.Count > i; i++)
                     {
-                        string Url = "http://project-megaroks931128.codeanyapp.com/news/add/?usersid=" + friends.Friends[i].Steamid;
+                        string Url = "http://project-megaroks931128.codeanyapp.com/users/add/?usersid=" + friends.Friends[i].Steamid;
                         string json = RequestJson(Url);
                         var obj1 = JObject.Parse(json);
                         var avatar = Convert.ToString(obj1["avatar"]);
@@ -201,7 +201,7 @@ namespace SteamAppClient
                         DateTime Friend_since = (new DateTime(1970, 1, 1)).AddSeconds(Convert.ToDouble(friends.Friends[i].Friend_since));
                         t.Rows.Add(new object[] { bmp, personaname, steamid, Friend_since, friends.Friends[i].Relationship });
                         dataGridView2.DataSource = t;
-                        Url = "http://project-megaroks931128.codeanyapp.com/news/del/?id=" + id;
+                        Url = "http://project-megaroks931128.codeanyapp.com/users/del/?id=" + id;
                         json = RequestJson(Url);
                     }
                 }
@@ -211,7 +211,6 @@ namespace SteamAppClient
                     dataGridView2.DataSource = null;
                     dataGridView2.Rows.Clear();
                 }
-
             }
             catch (Exception)
             {
@@ -227,7 +226,7 @@ namespace SteamAppClient
             {
                 string Data = Convert.ToString(textBox1.Text);
                 long s = Convert.ToInt64(textBox1.Text); 
-                string Url = "http://project-megaroks931128.codeanyapp.com/news/add/?usersid=" + Data;
+                string Url = "http://project-megaroks931128.codeanyapp.com/users/add/?usersid=" + Data;
                 string json = RequestJson(Url);
                 ResponseJson(json);
                 His(Data, json);
@@ -242,7 +241,7 @@ namespace SteamAppClient
 
         private void ListView1_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            string Url = "http://project-megaroks931128.codeanyapp.com/news/add/?usersid=" + listView1.SelectedItems[0].Text;
+            string Url = "http://project-megaroks931128.codeanyapp.com/users/add/?usersid=" + listView1.SelectedItems[0].Text;
             string json = RequestJson(Url);
             ResponseJson(json);
         }
@@ -250,7 +249,7 @@ namespace SteamAppClient
         private void DataGridView2_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             string Data = Convert.ToString(dataGridView2.CurrentRow.Cells[2].Value);
-            string Url = "http://project-megaroks931128.codeanyapp.com/news/add/?usersid=" + Data;
+            string Url = "http://project-megaroks931128.codeanyapp.com/users/add/?usersid=" + Data;
             string json = RequestJson(Url);
             ResponseJson(json);
             His(Data, json);
@@ -261,7 +260,7 @@ namespace SteamAppClient
             ListView.SelectedIndexCollection collection = listView1.SelectedIndices;
             if (collection.Count != 0)
             {
-                string Url = "http://project-megaroks931128.codeanyapp.com/news/del/?id=" + listView1.SelectedItems[0].SubItems[1].Text;
+                string Url = "http://project-megaroks931128.codeanyapp.com/users/del/?id=" + listView1.SelectedItems[0].SubItems[1].Text;
                 listView1.Items.RemoveAt(collection[0]);
                 RequestJson(Url);
             }
